@@ -1,0 +1,13 @@
+# Ignorar node_modules de ambos
+frontend/node_modules/
+backend/node_modules/
+
+# Ignorar build y dist
+frontend/dist/
+backend/dist/
+
+# Variables de entorno
+frontend/.env
+backend/.env
+frontend/.env.*
+backend/.env.*
