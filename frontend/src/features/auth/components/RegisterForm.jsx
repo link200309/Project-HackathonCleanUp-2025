@@ -41,7 +41,7 @@ const RegisterForm = () => {
 
     setSuccessMessage("¡Cuenta creada! Redirigiendo...");
     setTimeout(() => {
-      navigate("/dashboard");
+      navigate("/profile-setup");
     }, 1500);
   };
 

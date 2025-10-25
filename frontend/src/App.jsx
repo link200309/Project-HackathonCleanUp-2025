@@ -5,12 +5,14 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AuthProvider, useAuth } from "./features/auth/context/AuthContext";
-import Home from "./features/home/Home";
+import { AuthProvider } from "./features/auth/context/AuthContext";
 import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
+import ProfileSetupPage from "./features/profile/pages/ProfileSetupPage";
 import DashboardPage from "./pages/DashboardPage";
+import PublicRoute from "./shared/routes/PublicRoute";
+import ProtectedRoute from "./shared/routes/ProtectedRoute";
+import ProfileCheckRoute from "./shared/routes/ProfileCheckRoute";
 import "./App.css";
 import Navbar from "./components/Navbar";
 
@@ -53,41 +55,46 @@ function App() {
   return (
     <div className="bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700">
       <Navbar />
-      <Router>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-
-            <Route
-              path="/login"
-              element={
-                <PublicRoute>
-                  <LoginPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <PublicRoute>
-                  <RegisterPage />
-                </PublicRoute>
-              }
-            />
-
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <DashboardPage />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </AuthProvider>
-      </Router>
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <RegisterPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/profile-setup"
+            element={
+              <ProtectedRoute>
+                <ProfileSetupPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProfileCheckRoute>
+                <DashboardPage />
+              </ProfileCheckRoute>
+            }
+          />
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      </AuthProvider>
+    </Router>
     </div>
   );
 }
