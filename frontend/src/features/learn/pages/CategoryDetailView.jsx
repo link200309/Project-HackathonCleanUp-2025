@@ -2,7 +2,7 @@ import { ArrowLeft, Trash2, Leaf } from "lucide-react";
 
 function CategoryDetailView({ setCurrentView, selectedCategory }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4 md:p-8">
+    <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         <button
           onClick={() => setCurrentView("home")}
@@ -11,7 +11,7 @@ function CategoryDetailView({ setCurrentView, selectedCategory }) {
           <ArrowLeft className="w-5 h-5" /> Volver
         </button>
 
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="rounded-2xl shadow-xl overflow-hidden">
           <div className={`${selectedCategory.color} p-8 text-white`}>
             <span className="text-6xl mb-4 block">{selectedCategory.icon}</span>
             <h1 className="text-4xl font-bold mb-2">{selectedCategory.name}</h1>
