@@ -48,6 +48,15 @@ const LearningPage = () => {
       stars: 0,
     },
     {
+      id: "a50eb138-aaec-4118-8f28-80f88cdb888d",
+      type: "drag_and_drop",
+      title: "Separa residuos",
+      isCompleted: false,
+      isActive: true,
+      isLocked: false,
+      stars: 0,
+    },
+    {
       id: 5,
       type: "lesson",
       title: "Papel y Cartón",
@@ -56,15 +65,7 @@ const LearningPage = () => {
       isLocked: true,
       stars: 0,
     },
-    {
-      id: 6,
-      type: "lesson",
-      title: "Vidrio",
-      isCompleted: false,
-      isActive: false,
-      isLocked: true,
-      stars: 0,
-    },
+
     {
       id: 7,
       type: "test",
