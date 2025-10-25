@@ -36,9 +36,9 @@ const Navbar = () => {
   }, [lastScrollY]);
 
   const navItems = [
-    { name: "Jugar", path: "/learn" },
+    { name: "Jugar", path: "/game" },
     { name: "Recicladores", path: "/recicladores" },
-    { name: "Aprender", path: "/aprender" },
+    { name: "Aprender", path: "/learn" },
     { name: "Ranking", path: "/ranking" },
   ];
 

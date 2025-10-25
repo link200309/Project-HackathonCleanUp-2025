@@ -16,6 +16,7 @@ import ProtectedRoute from "./shared/routes/ProtectedRoute";
 import ProfileCheckRoute from "./shared/routes/ProfileCheckRoute";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import Learn from "./features/learn/pages/Learn";
 
 function App() {
   return (
@@ -62,6 +63,14 @@ function App() {
               element={
                 <ProfileCheckRoute>
                   <ChallengePage />
+                </ProfileCheckRoute>
+              }
+            />
+            <Route
+              path="/learn"
+              element={
+                <ProfileCheckRoute>
+                  <Learn />
                 </ProfileCheckRoute>
               }
             />
