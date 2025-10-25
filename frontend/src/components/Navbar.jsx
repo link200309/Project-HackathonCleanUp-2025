@@ -66,7 +66,7 @@ const Navbar = () => {
           </div>
 
           <button className="relative group overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-2xl transition-all duration-300 flex items-center gap-2">
-            <span className="relative z-10">Comenzar</span>
+            <span className="relative z-10">Iniciar sesión</span>
             <ChevronRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
