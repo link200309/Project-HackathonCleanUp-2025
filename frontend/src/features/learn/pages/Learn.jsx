@@ -9,7 +9,7 @@ function Learn() {
   const [selectedModule, setSelectedModule] = useState(null);
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen pt-10">
       {currentView === "home" && (
         <HomeView
           setCurrentView={setCurrentView}
