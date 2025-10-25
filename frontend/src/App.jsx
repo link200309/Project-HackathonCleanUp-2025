@@ -4,45 +4,15 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { AuthProvider, useAuth } from "./features/auth/context/AuthContext";
+import { AuthProvider } from "./features/auth/context/AuthContext";
 import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
+import ProfileSetupPage from "./features/profile/pages/ProfileSetupPage";
 import DashboardPage from "./pages/DashboardPage";
+import PublicRoute from "./shared/routes/PublicRoute";
+import ProtectedRoute from "./shared/routes/ProtectedRoute";
+import ProfileCheckRoute from "./shared/routes/ProfileCheckRoute";
 import "./App.css";
-
-const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 font-medium">Cargando...</p>
-        </div>
-      </div>
-    );
-  }
-
-  return user ? children : <Navigate to="/login" />;
-};
-
-const PublicRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 font-medium">Cargando...</p>
-        </div>
-      </div>
-    );
-  }
-
-  return !user ? children : <Navigate to="/dashboard" />;
-};
 
 function App() {
   return (
@@ -65,16 +35,22 @@ function App() {
               </PublicRoute>
             }
           />
-
           <Route
-            path="/dashboard"
+            path="/profile-setup"
             element={
               <ProtectedRoute>
-                <DashboardPage />
+                <ProfileSetupPage />
               </ProtectedRoute>
             }
           />
-
+          <Route
+            path="/dashboard"
+            element={
+              <ProfileCheckRoute>
+                <DashboardPage />
+              </ProfileCheckRoute>
+            }
+          />
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
