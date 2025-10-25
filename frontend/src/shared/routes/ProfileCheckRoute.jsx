@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import { useAuth } from "../../features/auth/context/AuthContext";
 import LoadingSpinner from "../components/LoadingSpinner";
 
+// COMENTADO: ProfileCheckRoute simplificado sin verificación de perfil
 const ProfileCheckRoute = ({ children }) => {
-  const { user, profile, profileLoading, loading } = useAuth();
+  const { user, loading } = useAuth(); // COMENTADO: profile, profileLoading
 
-  if (loading || profileLoading) {
+  if (loading) {
     return <LoadingSpinner />;
   }
 
@@ -14,6 +15,8 @@ const ProfileCheckRoute = ({ children }) => {
     return <Navigate to="/login" />;
   }
 
+  // COMENTADO: Verificación de perfil completo
+  /*
   if (!profile) {
     return <LoadingSpinner message="Cargando perfil..." />;
   }
@@ -24,6 +27,7 @@ const ProfileCheckRoute = ({ children }) => {
   if (!isProfileComplete) {
     return <Navigate to="/profile-setup" />;
   }
+  */
 
   return children;
 };

@@ -49,7 +49,7 @@ export default function ProfileSetupForm({ onSkip }) {
     });
 
     if (result.success) {
-      navigate("/dashboard");
+      navigate("/learn");
     }
   };
 
@@ -57,7 +57,7 @@ export default function ProfileSetupForm({ onSkip }) {
     if (onSkip) {
       onSkip();
     } else {
-      navigate("/dashboard");
+      navigate("/learn");
     }
   };
 
