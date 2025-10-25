@@ -1,10 +1,13 @@
+import { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider, useAuth } from "./features/auth/context/AuthContext";
+import Home from "./features/home/Home";
 import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -47,40 +50,43 @@ const PublicRoute = ({ children }) => {
 function App() {
   const [client] = useState(() => new QueryClient());
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <LoginPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <RegisterPage />
-              </PublicRoute>
-            }
-          />
+    <div className="">
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
 
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <DashboardPage />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute>
+                  <LoginPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <PublicRoute>
+                  <RegisterPage />
+                </PublicRoute>
+              }
+            />
 
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      </AuthProvider>
-    </Router>
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </AuthProvider>
+      </Router>
+    </div>
   );
 }
 
