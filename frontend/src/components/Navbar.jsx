@@ -1,10 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Recycle, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react"; // COMENTADO: React no es necesario
+import { Recycle, ChevronRight, LogOut } from "lucide-react"; // COMENTADO: User
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../features/auth/context/AuthContext";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const goLogin = () => {
+    navigate("/login");
+  };
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +44,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500 ${
         hidden ? "-translate-y-full" : "translate-y-0"
       } ${scrolled ? "backdrop-blur-xl" : "backdrop-blur-md"}`}
     >
@@ -65,11 +78,26 @@ const Navbar = () => {
             ))}
           </div>
 
-          <button className="relative group overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-2xl transition-all duration-300 flex items-center gap-2">
-            <span className="relative z-10">Iniciar sesión</span>
-            <ChevronRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </button>
+          {/* Botón de inicio de sesión o cerrar sesión */}
+          {!user ? (
+            <button
+              className="relative group overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-2xl transition-all duration-300 flex items-center gap-2"
+              onClick={goLogin}
+            >
+              <span className="relative z-10">Iniciar sesión</span>
+              <ChevronRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </button>
+          ) : (
+            <button
+              className="relative group overflow-hidden bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-2xl transition-all duration-300 flex items-center gap-2"
+              onClick={handleLogout}
+            >
+              <span className="relative z-10">Cerrar sesión</span>
+              <LogOut className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </button>
+          )}
         </div>
       </div>
     </nav>

@@ -10,7 +10,7 @@ const PublicRoute = ({ children }) => {
     return <LoadingSpinner />;
   }
 
-  return !user ? children : <Navigate to="/dashboard" />;
+  return !user ? children : <Navigate to="/learn" />;
 };
 
 PublicRoute.propTypes = {

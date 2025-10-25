@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { supabase } from "../../../lib/supabaseClient";
+// import { supabase } from "../../../lib/supabaseClient"; // COMENTADO
 import { useAuth } from "../../auth/context/AuthContext";
 
 /**
- * Hook personalizado para configurar el perfil del usuario
+ * COMENTADO: Hook personalizado para configurar el perfil del usuario
  * Maneja ciudad y selección de avatar
  */
 export function useProfileSetup() {
-  const { user, refreshUser } = useAuth();
+  const { user } = useAuth(); // COMENTADO: refreshUser
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   /**
-   * Actualiza el perfil del usuario con ciudad y avatar
+   * COMENTADO: Actualiza el perfil del usuario con ciudad y avatar
    */
   const updateProfile = async ({ city, avatarIcon }) => {
     try {
@@ -23,7 +23,8 @@ export function useProfileSetup() {
         throw new Error("Usuario no autenticado");
       }
 
-      // Actualizar en la tabla public.users
+      // COMENTADO: Actualizar en la tabla public.users
+      /*
       const { error: updateError } = await supabase
         .from("users")
         .update({
@@ -41,6 +42,14 @@ export function useProfileSetup() {
       if (refreshUser) {
         await refreshUser();
       }
+      */
+
+      console.log(
+        "Profile update disabled - city:",
+        city,
+        "avatar:",
+        avatarIcon
+      );
 
       return { success: true };
     } catch (err) {
