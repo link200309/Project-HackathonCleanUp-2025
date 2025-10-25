@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Recolector, Nina, Can } from "../components/Animations";
 
 const AuthLayout = ({ children }) => {
   return (
@@ -13,6 +14,8 @@ const AuthLayout = ({ children }) => {
       <div className="relative z-10 w-full flex items-center justify-center">
         {children}
       </div>
+
+      <Can className="absolute bottom-0 right-[70%]" />
 
       <div className="absolute bottom-6 left-0 right-0 text-center">
         <p className="text-gray-600 text-sm">

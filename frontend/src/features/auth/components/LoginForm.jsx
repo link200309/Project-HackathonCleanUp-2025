@@ -33,7 +33,7 @@ const LoginForm = () => {
       return;
     }
 
-    navigate("/dashboard");
+    navigate("/learn");
   };
 
   return (
