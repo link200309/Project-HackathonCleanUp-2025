@@ -12,13 +12,14 @@ import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import "./App.css";
+import Navbar from "./components/Navbar";
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600 font-medium">Cargando...</p>
@@ -35,7 +36,7 @@ const PublicRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600 font-medium">Cargando...</p>
@@ -50,7 +51,8 @@ const PublicRoute = ({ children }) => {
 function App() {
   const [client] = useState(() => new QueryClient());
   return (
-    <div className="">
+    <div className="bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700">
+      <Navbar />
       <Router>
         <AuthProvider>
           <Routes>

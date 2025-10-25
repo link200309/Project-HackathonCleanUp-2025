@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Play,
 } from "lucide-react";
+import recycle from "../../assets/images/Recycle.webp";
 
 const Home = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -33,8 +34,8 @@ const Home = () => {
 
   return (
     <div className="min-h-screen overflow-hidden relative pt-10">
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32 h-[110dvh]">
+        <div className="grid lg:grid-cols-2 gap-12 items-center pt-16">
           <div className="space-y-8 animate-fade-in-up">
             <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-green-700 px-4 py-2 rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all">
               <Sparkles className="w-4 h-4" />
@@ -66,7 +67,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="relative perspective-1000 ">
+          <div className="relative perspective-1000">
             <div
               className="relative z-10 transform-3d"
               style={{
@@ -76,19 +77,19 @@ const Home = () => {
                 transition: "transform 0.3s ease-out",
               }}
             >
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-full p-10 shadow-2xl">
-                <div className="relative overflow-hidden rounded-full">
+              <div className="relative bg-white/10 backdrop-blur-sm rounded-full p-8 shadow-2xl w-[60dvh] h-[60dvh] flex items-center justify-center mx-auto">
+                <div className="relative overflow-hidden rounded-full w-full h-full items-center justify-center flex">
                   <img
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0%25' stop-color='%2310b981'/%3E%3Cstop offset='100%25' stop-color='%233b82f6'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='200' fill='url(%23g)'/%3E%3C/svg%3E"
-                    alt="World"
-                    className="w-full h-full object-cover animate-rotate-3d"
+                    src={recycle}
+                    alt="Recycle"
+                    className="w-[40dvh] h-[40dvh] object-cover animate-rotate-3d"
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent animate-shine"></div>
                 </div>
 
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="absolute w-[80dvh] h-[80dvh] border-4 border-white/20 rounded-full animate-orbit-1"></div>
-                  <div className="absolute w-[80dvh] h-[80dvh] border-4 border-emerald-300/20 rounded-full animate-orbit-2"></div>
+                  <div className="absolute w-full h-full border-4 border-white/20 rounded-full animate-orbit-1"></div>
+                  <div className="absolute w-[110%] h-[110%] border-4 border-emerald-300/20 rounded-full animate-orbit-2"></div>
                 </div>
 
                 <div
