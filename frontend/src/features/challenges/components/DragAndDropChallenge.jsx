@@ -2,9 +2,16 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { GripVertical } from "lucide-react";
 
+// Importar imágenes de basureros
+import TrashYellow from "../../../assets/images/TrashYellow.webp";
+import TrashGreen from "../../../assets/images/TrashGreen.webp";
+import TrashBlue from "../../../assets/images/TrashBlue.webp";
+import TrashGrey from "../../../assets/images/TrashGrey.webp";
+import TrashBlack from "../../../assets/images/TrashBlack.webp";
+
 /**
  * Componente para desafíos de arrastrar y soltar
- * Los items se deben clasificar en categorías
+ * Los items se deben clasificar en categorías con imágenes de basureros
  */
 const DragAndDropChallenge = ({ challenge, onSubmit }) => {
   const [draggedItem, setDraggedItem] = useState(null);
@@ -57,6 +64,33 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
     return challenge.options.filter((opt) => !droppedItems[opt.name]);
   };
 
+  // Obtener imagen del basurero según categoría
+  const getTrashImage = (category) => {
+    const images = {
+      organico: TrashGreen, // Verde para orgánico
+      plastico: TrashYellow, // Amarillo para plástico
+      "papel-carton": TrashBlue, // Azul para papel y cartón
+      vidrio: TrashGreen, // Verde para vidrio
+      metal: TrashYellow, // Amarillo para metal
+      "no-reciclable": TrashBlack, // Negro para no reciclable
+    };
+
+    return images[category] || TrashGrey; // Default si no coincide
+  };
+
+  // Obtener nombre legible de la categoría
+  const getCategoryName = (category) => {
+    const names = {
+      organico: "Orgánico",
+      plastico: "Plástico",
+      "papel-carton": "Papel y Cartón",
+      vidrio: "Vidrio",
+      metal: "Metal",
+      "no-reciclable": "No Reciclable",
+    };
+    return names[category] || category;
+  };
+
   const getCategoryColor = (category) => {
     const colors = {
       organico: "bg-amber-100 border-amber-400",
@@ -83,54 +117,86 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
 
       {/* Items sin clasificar */}
       <div className="mb-8">
-        <h3 className="font-bold text-gray-700 mb-3">
-          Elementos por clasificar:
+        <h3 className="font-bold text-gray-700 mb-4 text-lg flex items-center gap-2">
+          <span className="text-2xl">🗑️</span>
+          Arrastra estos residuos al basurero correcto:
         </h3>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 justify-center">
           {getUnplacedItems().map((item, index) => (
             <div
               key={index}
               draggable={!hasSubmitted}
               onDragStart={() => handleDragStart(item)}
-              className={`flex items-center gap-2 bg-white border-2 border-gray-300 px-4 py-3 rounded-xl shadow-md ${
+              className={`flex items-center gap-2 bg-gradient-to-br from-white to-gray-50 border-3 border-gray-300 px-5 py-3 rounded-2xl shadow-lg ${
                 !hasSubmitted
-                  ? "cursor-move hover:border-green-400 hover:shadow-lg"
+                  ? "cursor-move hover:border-green-400 hover:shadow-2xl hover:scale-110 active:scale-95"
                   : "cursor-not-allowed opacity-75"
-              } transition-all`}
+              } transition-all duration-200`}
             >
-              <GripVertical className="w-4 h-4 text-gray-400" />
-              <span className="font-semibold text-gray-800">{item.name}</span>
+              <GripVertical className="w-5 h-5 text-gray-400" />
+              <span className="font-bold text-gray-800 text-base">
+                {item.name}
+              </span>
             </div>
           ))}
         </div>
+        {getUnplacedItems().length === 0 && !hasSubmitted && (
+          <div className="text-center py-4">
+            <p className="text-green-600 font-bold text-lg">
+              ¡Todos los residuos clasificados! 🎉
+            </p>
+            <p className="text-gray-500 text-sm">
+              Haz clic en &quot;Verificar&quot; para comprobar tus respuestas
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* Categorías (Zonas de drop) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      {/* Categorías (Zonas de drop con imágenes de basureros) */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
         {categories.map((category) => (
           <div
             key={category}
             onDragOver={handleDragOver}
             onDrop={() => handleDrop(category)}
-            className={`${getCategoryColor(
+            className={`relative ${getCategoryColor(
               category
-            )} border-4 border-dashed rounded-2xl p-4 min-h-[150px] transition-all ${
-              draggedItem ? "scale-105 shadow-lg" : ""
-            }`}
+            )} border-4 rounded-3xl p-4 min-h-[280px] transition-all ${
+              draggedItem
+                ? "scale-105 shadow-2xl ring-4 ring-green-400"
+                : "shadow-lg"
+            } hover:shadow-xl cursor-pointer`}
           >
-            <h4 className="font-bold text-gray-800 mb-3 capitalize">
-              {category.replace("-", " ")}
-            </h4>
-            <div className="space-y-2">
+            {/* Imagen del basurero */}
+            <div className="flex flex-col items-center mb-3">
+              <img
+                src={getTrashImage(category)}
+                alt={`Basurero ${getCategoryName(category)}`}
+                className="w-24 h-24 object-contain mb-2 drop-shadow-lg"
+              />
+              <h4 className="font-black text-gray-800 text-center text-lg">
+                {getCategoryName(category)}
+              </h4>
+            </div>
+
+            {/* Items dentro del basurero */}
+            <div className="space-y-2 max-h-[120px] overflow-y-auto">
               {getItemsInCategory(category).map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white border-2 border-gray-300 px-3 py-2 rounded-lg shadow-sm"
+                  className="bg-white/90 backdrop-blur-sm border-2 border-gray-300 px-3 py-2 rounded-xl shadow-sm hover:shadow-md transition-all"
                 >
-                  <span className="font-medium text-gray-700">{item.name}</span>
+                  <span className="font-medium text-gray-700 text-sm">
+                    {item.name}
+                  </span>
                 </div>
               ))}
             </div>
+
+            {/* Indicador de arrastre */}
+            {draggedItem && (
+              <div className="absolute inset-0 border-4 border-dashed border-green-500 rounded-3xl pointer-events-none animate-pulse"></div>
+            )}
           </div>
         ))}
       </div>

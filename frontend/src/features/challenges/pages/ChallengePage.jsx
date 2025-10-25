@@ -7,10 +7,6 @@ import MultipleChoiceChallenge from "../components/MultipleChoiceChallenge";
 import DragAndDropChallenge from "../components/DragAndDropChallenge";
 import ResultModal from "../components/ResultModal";
 
-/**
- * Página principal de desafíos
- * Carga un challenge por ID y muestra el componente correspondiente según su tipo
- */
 const ChallengePage = () => {
   const { challengeId } = useParams();
   const navigate = useNavigate();
@@ -20,7 +16,6 @@ const ChallengePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Estado para el modal de resultado
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [userAnswer, setUserAnswer] = useState("");
@@ -65,7 +60,6 @@ const ChallengePage = () => {
     setShowResult(true);
 
     try {
-      // Guardar progreso en la base de datos
       const { error: progressError } = await supabase
         .from("user_progress")
         .upsert(
@@ -85,7 +79,6 @@ const ChallengePage = () => {
         console.error("Error guardando progreso:", progressError);
       }
 
-      // Si es correcto, actualizar XP y stats
       if (correct) {
         const { error: statsError } = await supabase.rpc("increment", {
           table_name: "user_stats",
@@ -98,7 +91,6 @@ const ChallengePage = () => {
           console.error("Error actualizando XP:", statsError);
         }
 
-        // Actualizar contador de challenges completados
         const { error: countError } = await supabase.rpc("increment", {
           table_name: "user_stats",
           row_id: user.id,
@@ -125,7 +117,6 @@ const ChallengePage = () => {
     setUserAnswer("");
   };
 
-  // Obtener color de categoría
   const getCategoryColor = (category) => {
     const colors = {
       organico: "from-amber-600 to-orange-600",

@@ -4,6 +4,7 @@ import { useAuth } from "../../auth/context/AuthContext";
 import UnitHeader from "../components/UnitHeader";
 import LearningPath from "../components/LearningPath";
 import { Flame, Gem, Award } from "lucide-react";
+import { Recolector } from "../../../shared/components/Animations";
 
 const LearningPage = () => {
   const navigate = useNavigate();
@@ -163,6 +164,8 @@ const LearningPage = () => {
         />
 
         <LearningPath lessons={mockLessons} onLessonClick={handleLessonClick} />
+
+        <Recolector className="absolute" />
 
         <div className="mt-16 mb-8 text-center">
           <div className="inline-block bg-white/95 backdrop-blur-sm rounded-3xl border-b-8 border-yellow-400 px-8 py-6 shadow-2xl">
