@@ -11,7 +11,7 @@ import { learningModules } from "../ModulesData";
 
 function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4 md:p-8">
+    <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
           <div className="flex items-center justify-between">
@@ -20,7 +20,7 @@ function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
                 <Leaf className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-800">EcoLearn</h1>
+                <h1 className="text-3xl font-bold text-neutral-800">EcoLearn</h1>
                 <p className="text-gray-600">Aprende a cuidar el planeta</p>
               </div>
             </div>
@@ -34,7 +34,7 @@ function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-neutral-100 mb-4 flex items-center gap-2">
             <Recycle className="w-7 h-7 text-green-600" /> Tipos de Residuos
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -51,7 +51,7 @@ function App() {
               }
             />
             <Route
-              path="/learn"
+              path="/game"
               element={
                 <ProfileCheckRoute>
                   <LearningPage />
