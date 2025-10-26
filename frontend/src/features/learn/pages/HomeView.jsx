@@ -12,6 +12,7 @@ function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
         unit={false}
         title="Aprendamos a Reciclar"
         description="Aprende los fundamentos del reciclaje, los tipos de contenedores y cómo reciclar correctamente."
+        icon = "BookOpen"
       />
 
       <div className="max-w-6xl mx-auto px-4">

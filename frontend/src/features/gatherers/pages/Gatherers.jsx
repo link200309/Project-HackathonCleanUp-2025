@@ -14,6 +14,7 @@ import {
   X,
   Check,
 } from "lucide-react";
+import Header from "../../../components/Header";
 
 const RecyclersMarketplace = () => {
   const [activeTab, setActiveTab] = useState("buscar");
@@ -184,28 +185,21 @@ const RecyclersMarketplace = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-6 shadow-lg">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <Recycle className="w-10 h-10" />
-              <div>
-                <h1 className="text-3xl font-bold">Red de Recicladores</h1>
-                <p className="text-emerald-100">
-                  Conecta, recicla y transforma tu comunidad
-                </p>
-              </div>
+      <Header
+        title="Red de Recicladores"
+        description="Conecta, recicla y transforma tu comunidad"
+        rightContent={
+          <div className="text-right">
+            <div className="text-2xl font-bold text-white drop-shadow">
+              {recyclers.length}
             </div>
-            <div className="text-right">
-              <div className="text-2xl font-bold">{recyclers.length}</div>
-              <div className="text-sm text-emerald-100">
-                Recicladores activos
-              </div>
+            <div className="text-sm text-yellow-100 font-semibold">
+              Recicladores activos
             </div>
           </div>
-        </div>
-      </div>
+        }
+        icon="Recycle"
+      />
 
       {/* Tabs */}
       <div className="bg-white shadow-md sticky top-0 z-10">
