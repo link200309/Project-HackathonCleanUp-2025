@@ -109,8 +109,6 @@ La aplicación estará disponible en `http://localhost:5173`
 
 <div align="center">
 
-### Pantalla Principal de Juego
-
 ![Vista de inicio](./img/home.png)
 ![Seccion de niveles de juego](./img/jugar.png)
 ![seccion de información](./img/aprender.png)
@@ -119,50 +117,10 @@ La aplicación estará disponible en `http://localhost:5173`
 
 </div>
 
----
-
-## 🎯 Roadmap
-
-- [x] Sistema de autenticación y perfiles
-- [x] Niveles básicos de clasificación
-- [x] Integración con cámara
-- [x] Marketplace de recicladores
-- [ ] App móvil nativa (iOS/Android)
-- [ ] Sistema de recompensas físicas
-- [ ] Integración con municipios
-- [ ] Expansión internacional
-- [ ] Gamificación para empresas
-
----
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas y apreciadas. Para contribuir:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
----
-
-## 👥 Equipo
-
-**EcoQuest Team** - CleanUp Hack 2025
-
-- 🎨 **Diseño UX/UI** - [Nombre]
-- 💻 **Desarrollo Frontend** - [Nombre]
-- ⚙️ **Desarrollo Backend** - [Nombre]
-- 🤖 **Machine Learning** - [Nombre]
-
----
-
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 
----
 
 ## 🌟 Agradecimientos
 
