@@ -45,9 +45,7 @@ const LoginForm = () => {
         <p className="text-gray-600">Continúa tu aventura ecológica</p>
       </div>
 
-      {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        {/* Email */}
         <Input
           label="Correo electrónico"
           type="email"
@@ -63,7 +61,6 @@ const LoginForm = () => {
           })}
         />
 
-        {/* Password */}
         <Input
           label="Contraseña"
           type="password"
@@ -75,7 +72,6 @@ const LoginForm = () => {
           })}
         />
 
-        {/* Forgot Password Link */}
         <div className="text-right">
           <Link
             to="/forgot-password"
@@ -85,14 +81,12 @@ const LoginForm = () => {
           </Link>
         </div>
 
-        {/* Error Message */}
         {errorMessage && (
           <div className="p-4 bg-red-50 border-2 border-red-200 rounded-xl animate-shake">
             <p className="text-red-700 text-sm font-medium">{errorMessage}</p>
           </div>
         )}
 
-        {/* Submit Button */}
         <Button
           type="submit"
           variant="primary"
@@ -105,7 +99,6 @@ const LoginForm = () => {
         </Button>
       </form>
 
-      {/* Divider */}
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t-2 border-gray-200"></div>
@@ -115,7 +108,6 @@ const LoginForm = () => {
         </div>
       </div>
 
-      {/* Guest Mode Button (opcional) */}
       <Button
         type="button"
         variant="outline"
@@ -126,7 +118,6 @@ const LoginForm = () => {
         🎮 Probar como invitado
       </Button>
 
-      {/* Footer */}
       <div className="mt-6 text-center">
         <p className="text-gray-600">
           ¿No tienes cuenta?{" "}

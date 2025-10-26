@@ -18,30 +18,18 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("🔐 AuthContext: Inicializando...");
-
     supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log("🔐 AuthContext: Sesión obtenida:", session);
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
-      console.log(
-        "🔐 AuthContext: Usuario establecido:",
-        session?.user ?? null
-      );
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      console.log("🔐 AuthContext: Cambio de estado:", _event, session);
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
-      console.log(
-        "🔐 AuthContext: Usuario actualizado:",
-        session?.user ?? null
-      );
     });
 
     return () => subscription.unsubscribe();
@@ -49,10 +37,6 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async ({ email, password, username }) => {
     try {
-      console.log("📝 AuthContext: Registrando usuario...", {
-        email,
-        username,
-      });
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -65,7 +49,6 @@ export const AuthProvider = ({ children }) => {
 
       if (error) throw error;
 
-      console.log("✅ AuthContext: Registro exitoso:", data);
       return { data, error: null };
     } catch (error) {
       console.error("❌ AuthContext: Error en registro:", error);
@@ -75,7 +58,6 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async ({ email, password }) => {
     try {
-      console.log("🔑 AuthContext: Iniciando sesión...", { email });
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -83,9 +65,6 @@ export const AuthProvider = ({ children }) => {
 
       if (error) throw error;
 
-      console.log("✅ AuthContext: Login exitoso:", data);
-      console.log("✅ AuthContext: Usuario:", data.user);
-      console.log("✅ AuthContext: Sesión:", data.session);
       return { data, error: null };
     } catch (error) {
       console.error("❌ AuthContext: Error en login:", error);
