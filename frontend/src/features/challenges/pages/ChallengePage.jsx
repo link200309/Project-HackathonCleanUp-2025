@@ -6,6 +6,7 @@ import { useAuth } from "../../auth/context/AuthContext";
 import MultipleChoiceChallenge from "../components/MultipleChoiceChallenge";
 import DragAndDropChallenge from "../components/DragAndDropChallenge";
 import ResultModal from "../components/ResultModal";
+import Character3 from "../../../assets/images/characters/Character3.png";
 
 const ChallengePage = () => {
   const { challengeId } = useParams();
@@ -175,7 +176,7 @@ const ChallengePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700">
+    <div className="relative min-h-screen bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700">
       {/* Header */}
       <div className="bg-white/10 backdrop-blur-sm border-b-4 border-yellow-400">
         <div className="max-w-4xl mx-auto px-4 py-4">
@@ -243,6 +244,10 @@ const ChallengePage = () => {
             <p>Tipo de desafío no soportado: {challenge.type}</p>
           </div>
         )}
+      </div>
+
+      <div className="absolute w-[10%] top-[36%] left-[5%]">
+        <img src={Character3} alt="" />
       </div>
 
       {/* Result Modal */}

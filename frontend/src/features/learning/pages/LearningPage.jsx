@@ -7,6 +7,9 @@ import { Flame, Sparkles, Award } from "lucide-react";
 import Character1 from "../../../assets/images/characters/Character1.png";
 import Character2 from "../../../assets/images/characters/Character2.png";
 import Avatar1 from "../../../assets/images/characters/avatar1.png";
+import BigCloud from "../../../assets/images/decoration/bigCloud.png";
+import Cloud from "../../../assets/images/decoration/cloud.png";
+import SmallCloud from "../../../assets/images/decoration/smallCloud.png";
 
 const LearningPage = () => {
   const navigate = useNavigate();
@@ -187,6 +190,38 @@ const LearningPage = () => {
       </div>
 
       <div className="relative max-w-4xl mx-auto px-4 py-8">
+        {/* Nubes decorativas flotantes */}
+        <div className="absolute top-[10%] left-[-5%] w-32 opacity-80 animate-float pointer-events-none z-0">
+          <img src={BigCloud} alt="" className="w-full" />
+        </div>
+        <div
+          className="absolute top-[5%] right-[-3%] w-24 opacity-70 animate-float-delayed pointer-events-none z-0"
+          style={{ animationDelay: "2s" }}
+        >
+          <img src={Cloud} alt="" className="w-full" />
+        </div>
+        <div
+          className="absolute top-[35%] left-[-8%] w-20 opacity-60 animate-float pointer-events-none z-0"
+          style={{ animationDelay: "4s" }}
+        >
+          <img src={SmallCloud} alt="" className="w-full" />
+        </div>
+        <div
+          className="absolute top-[60%] right-[-5%] w-28 opacity-75 animate-float-delayed pointer-events-none z-0"
+          style={{ animationDelay: "1s" }}
+        >
+          <img src={Cloud} alt="" className="w-full" />
+        </div>
+        <div
+          className="absolute bottom-[20%] left-[-4%] w-24 opacity-65 animate-float pointer-events-none z-0"
+          style={{ animationDelay: "3s" }}
+        >
+          <img src={SmallCloud} alt="" className="w-full" />
+        </div>
+        <div className="absolute bottom-[10%] right-[-6%] w-32 opacity-70 animate-float-delayed pointer-events-none z-0">
+          <img src={BigCloud} alt="" className="w-full" />
+        </div>
+
         <UnitHeader
           unitNumber={selectedUnit}
           title="Fundamentos del Reciclaje"
