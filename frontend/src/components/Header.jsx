@@ -24,9 +24,9 @@ const Header = ({
 
   return (
     <div
-      className={`sticky top-0 z-10 bg-gradient-to-r ${
+      className={`z-10 bg-gradient-to-r ${
         colorClasses[color] || colorClasses.green
-      } border-b-4 shadow-xl mb-8`}
+      } border-b-4 shadow-xl`}
     >
       <div className="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
         <div className="flex items-center gap-3">

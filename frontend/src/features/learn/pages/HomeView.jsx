@@ -15,7 +15,7 @@ function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
         icon = "BookOpen"
       />
 
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-4 mt-10">
         <WasteCategoriesGrid
           setSelectedCategory={setSelectedCategory}
           setCurrentView={setCurrentView}

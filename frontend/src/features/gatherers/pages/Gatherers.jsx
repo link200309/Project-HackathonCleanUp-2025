@@ -1,12 +1,10 @@
 import { useState } from "react";
 import {
-  Search,
   MapPin,
   Phone,
   Mail,
   Building2,
   User,
-  Plus,
   Filter,
   Star,
   Recycle,
@@ -15,6 +13,7 @@ import {
   Check,
 } from "lucide-react";
 import Header from "../../../components/Header";
+import TabsBar from "../components/TabsBar";
 
 const RecyclersMarketplace = () => {
   const [activeTab, setActiveTab] = useState("buscar");
@@ -184,7 +183,7 @@ const RecyclersMarketplace = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50">
+    <div className="min-h-screen">
       <Header
         title="Red de Recicladores"
         description="Conecta, recicla y transforma tu comunidad"
@@ -201,47 +200,11 @@ const RecyclersMarketplace = () => {
         icon="Recycle"
       />
 
-      {/* Tabs */}
-      <div className="bg-white shadow-md sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto flex">
-          <button
-            onClick={() => setActiveTab("buscar")}
-            className={`flex-1 py-4 px-6 font-semibold transition-all ${
-              activeTab === "buscar"
-                ? "bg-emerald-600 text-white"
-                : "text-gray-600 hover:bg-gray-50"
-            }`}
-          >
-            <Search className="w-5 h-5 inline mr-2" />
-            Buscar Recicladores
-          </button>
-          <button
-            onClick={() => setActiveTab("ofrecer")}
-            className={`flex-1 py-4 px-6 font-semibold transition-all ${
-              activeTab === "ofrecer"
-                ? "bg-emerald-600 text-white"
-                : "text-gray-600 hover:bg-gray-50"
-            }`}
-          >
-            <Package className="w-5 h-5 inline mr-2" />
-            Ofrece Materiales
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab("unirse");
-              setShowAddForm(true);
-            }}
-            className={`flex-1 py-4 px-6 font-semibold transition-all ${
-              activeTab === "unirse"
-                ? "bg-emerald-600 text-white"
-                : "text-gray-600 hover:bg-gray-50"
-            }`}
-          >
-            <Plus className="w-5 h-5 inline mr-2" />
-            Únete como Reciclador
-          </button>
-        </div>
-      </div>
+      <TabsBar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        setShowAddForm={setShowAddForm}
+      />
 
       <div className="max-w-6xl mx-auto p-6">
         {/* Búsqueda de Recicladores */}
