@@ -11,6 +11,7 @@ import RegisterPage from "./features/auth/pages/RegisterPage";
 import ProfileSetupPage from "./features/profile/pages/ProfileSetupPage";
 import LearningPage from "./features/learning/pages/LearningPage";
 import ChallengePage from "./features/challenges/pages/ChallengePage";
+import RankingPage from "./features/rank/pages/RankingPage";
 import PublicRoute from "./shared/routes/PublicRoute";
 import ProtectedRoute from "./shared/routes/ProtectedRoute";
 import ProfileCheckRoute from "./shared/routes/ProfileCheckRoute";
@@ -71,6 +72,14 @@ function App() {
               element={
                 <ProfileCheckRoute>
                   <Learn />
+                </ProfileCheckRoute>
+              }
+            />
+            <Route
+              path="/ranking"
+              element={
+                <ProfileCheckRoute>
+                  <RankingPage />
                 </ProfileCheckRoute>
               }
             />

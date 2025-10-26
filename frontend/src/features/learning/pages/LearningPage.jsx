@@ -234,7 +234,20 @@ const LearningPage = () => {
         <div className="w-[25%] absolute top-[15%] left-[8%]">
           <img src={Character1} alt="" />
         </div>
+
+        {/* Character 2 con nube de diálogo */}
         <div className="w-[20%] absolute bottom-[5%] right-[5%]">
+          {/* Nube de diálogo inspiradora */}
+          <div className="absolute bottom-[100%] right-[-10%] mb-4 animate-float-delayed z-10">
+            <div className="relative bg-white rounded-3xl shadow-2xl px-6 py-4 max-w-[280px] border-4 border-green-400">
+              <p className="text-green-800 font-bold text-sm leading-relaxed text-center">
+                &ldquo;¡Cada residuo en su lugar hace la diferencia!;
+              </p>
+              {/* Pico de la nube de diálogo */}
+              <div className="absolute bottom-[-12px] right-[30%] w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-green-400"></div>
+              <div className="absolute bottom-[-8px] right-[30%] w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-white"></div>
+            </div>
+          </div>
           <img src={Character2} alt="" />
         </div>
 
