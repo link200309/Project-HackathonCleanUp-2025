@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { BookOpen, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { learningModules } from "../ModulesData";
 import Header from "../../../components/Header";
 import WasteCategoriesGrid from "../components/WasteCategories";
@@ -19,9 +19,9 @@ function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
           setCurrentView={setCurrentView}
         />
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-            <BookOpen className="w-7 h-7 text-blue-600" /> Módulos Educativos
-          </h2>
+          <h1 className="text-3xl font-bold text-white mb-12 text-center">
+            Módulos de Aprendizaje
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {learningModules.map((module) => (
               <div
