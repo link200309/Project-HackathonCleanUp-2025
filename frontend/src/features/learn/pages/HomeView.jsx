@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
-import { Recycle, BookOpen, Trash2, ChevronRight } from "lucide-react";
-import { wasteCategories } from "../CategoriesData";
+import { BookOpen, ChevronRight } from "lucide-react";
 import { learningModules } from "../ModulesData";
 import Header from "../../../components/Header";
-import TrashBin from "../../../components/TrashBin";
+import WasteCategoriesGrid from "../components/WasteCategories";
 
 function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
   return (
@@ -15,52 +14,10 @@ function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
           description="Aprende los fundamentos del reciclaje, los tipos de contenedores y cómo reciclar correctamente."
         />
 
-        <div className="h-[100dvh]">
-          <h2 className="text-2xl font-bold text-neutral-100 mb-4 flex items-center gap-2">
-            <Recycle className="w-7 h-7 text-neutral-100" /> Tipos de Residuos
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {wasteCategories.map((category) => (
-              <div
-                key={category.id}
-                onClick={() => {
-                  setSelectedCategory(category);
-                  setCurrentView("detail");
-                }}
-                className="flex items-end cursor-pointer group my-12 h-48"
-              >
-                <div className="flex-shrink-0 h-full flex items-end">
-                  <TrashBin
-                    colorName={category.trashColorName}
-                    label={category.name}
-                  />
-                </div>
-                <div className="relative h-44 border bg-black/20 rounded-xl shadow-md hover:shadow-2xl transition-all transform group-hover:-translate-y-1 group-hover:scale-[1.02] duration-300 overflow-hidden ml-[-20px] flex-1 z-10">
-                  <div
-                    className={`${category.color} p-4 flex items-center justify-between`}
-                  >
-                    <h3 className="font-bold text-lg text-neutral-100">
-                      {category.name}
-                    </h3>
-                    <ChevronRight className="w-6 h-6 text-neutral-100" />
-                  </div>
-                  <div className="p-4">
-                    <p className="text-neutral-300 text-sm font-semibold mb-3 line-clamp-2">
-                      {category.description}
-                    </p>
-                    <div className="flex items-center gap-2 text-xs">
-                      <Trash2 className="w-4 h-4 text-neutral-400" />
-                      <span className="text-neutral-400 font-semibold">
-                        Contenedor: {category.binColor}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <WasteCategoriesGrid
+          setSelectedCategory={setSelectedCategory}
+          setCurrentView={setCurrentView}
+        />
         <div>
           <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
             <BookOpen className="w-7 h-7 text-blue-600" /> Módulos Educativos
