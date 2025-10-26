@@ -6,11 +6,8 @@ import { useAuth } from "../../auth/context/AuthContext";
 import MultipleChoiceChallenge from "../components/MultipleChoiceChallenge";
 import DragAndDropChallenge from "../components/DragAndDropChallenge";
 import ResultModal from "../components/ResultModal";
+import Character3 from "../../../assets/images/characters/Character3.png";
 
-/**
- * Página principal de desafíos
- * Carga un challenge por ID y muestra el componente correspondiente según su tipo
- */
 const ChallengePage = () => {
   const { challengeId } = useParams();
   const navigate = useNavigate();
@@ -20,7 +17,6 @@ const ChallengePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Estado para el modal de resultado
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [userAnswer, setUserAnswer] = useState("");
@@ -65,7 +61,6 @@ const ChallengePage = () => {
     setShowResult(true);
 
     try {
-      // Guardar progreso en la base de datos
       const { error: progressError } = await supabase
         .from("user_progress")
         .upsert(
@@ -85,7 +80,6 @@ const ChallengePage = () => {
         console.error("Error guardando progreso:", progressError);
       }
 
-      // Si es correcto, actualizar XP y stats
       if (correct) {
         const { error: statsError } = await supabase.rpc("increment", {
           table_name: "user_stats",
@@ -98,7 +92,6 @@ const ChallengePage = () => {
           console.error("Error actualizando XP:", statsError);
         }
 
-        // Actualizar contador de challenges completados
         const { error: countError } = await supabase.rpc("increment", {
           table_name: "user_stats",
           row_id: user.id,
@@ -117,7 +110,7 @@ const ChallengePage = () => {
 
   const handleCloseResult = () => {
     setShowResult(false);
-    navigate("/learn");
+    navigate(-1);
   };
 
   const handleTryAgain = () => {
@@ -125,7 +118,6 @@ const ChallengePage = () => {
     setUserAnswer("");
   };
 
-  // Obtener color de categoría
   const getCategoryColor = (category) => {
     const colors = {
       organico: "from-amber-600 to-orange-600",
@@ -173,7 +165,7 @@ const ChallengePage = () => {
             {error || "Desafío no encontrado"}
           </p>
           <button
-            onClick={() => navigate("/learn")}
+            onClick={() => navigate(-1)}
             className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-xl transition-all"
           >
             Volver a Aprender
@@ -184,13 +176,13 @@ const ChallengePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700">
+    <div className="relative min-h-screen bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700">
       {/* Header */}
       <div className="bg-white/10 backdrop-blur-sm border-b-4 border-yellow-400">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <button
-              onClick={() => navigate("/learn")}
+              onClick={() => navigate(-1)}
               className="flex items-center gap-2 text-white font-bold hover:text-yellow-300 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -252,6 +244,10 @@ const ChallengePage = () => {
             <p>Tipo de desafío no soportado: {challenge.type}</p>
           </div>
         )}
+      </div>
+
+      <div className="absolute w-[10%] top-[36%] left-[5%]">
+        <img src={Character3} alt="" />
       </div>
 
       {/* Result Modal */}
