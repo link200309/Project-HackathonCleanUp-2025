@@ -1,0 +1,58 @@
+export const videos = [
+  {
+    id: 1,
+    title: "¿Cómo reciclar? - Guía completa de reciclaje",
+    videoId: "YiHTNfKJwAw",
+    thumbnail: "https://img.youtube.com/vi/YiHTNfKJwAw/maxresdefault.jpg",
+    description: "¿Sabes a qué contenedor de reciclaje va cada cosa? En este vídeo te mostramos cómo reciclar correctamente, aparte de algunos datos interesantes sobre el reciclaje.",
+  },
+  {
+    id: 2,
+    title: "¿Por qué el Reciclaje es tan Importante? ",
+    videoId: "UFFFUTMlCw",
+    thumbnail: "https://img.youtube.com/vi/UFFFUTMlCw/maxresdefault.jpg",
+    description: "Descubre cómo el reciclaje ayuda al medio ambiente",
+  },
+  {
+    id: 3,
+    title: "Causas y consecuencias de la contaminación",
+    videoId: "IMxOYSUSLmU",
+    thumbnail: "https://img.youtube.com/vi/IMxOYSUSLmU/maxresdefault.jpg",
+    description: "El impacto del plástico en nuestros océanos",
+  },
+  {
+    id: 4,
+    title: "Cómo empezar a reciclar en casa de forma sencilla",
+    videoId: "eDFECiSBgd0",
+    thumbnail: "https://img.youtube.com/vi/eDFECiSBgd0/maxresdefault.jpg",
+    description: "Guía práctica para separar residuos correctamente",
+  },
+  {
+    id: 5,
+    title: "Reciclaje: Cuidemos el Planeta",
+    videoId: "X0DjNXO5a3w",
+    thumbnail: "https://img.youtube.com/vi/X0DjNXO5a3w/maxresdefault.jpg",
+    description: "Video animado sobre la importancia del reciclaje",
+  },
+  {
+    id: 6,
+    title: "Reduce, Reutiliza, Recicla",
+    videoId: "xPAE3MqQPOc",
+    thumbnail: "https://img.youtube.com/vi/xPAE3MqQPOc/maxresdefault.jpg",
+    description: "Las 3 R del cuidado ambiental",
+  },
+  {
+    id: 7,
+    title: "Reciclaje Creativo",
+    videoId: "cJ8Go24u-40",
+    thumbnail: "https://img.youtube.com/vi/cJ8Go24u-40/maxresdefault.jpg",
+    description: "Ideas creativas para reutilizar materiales",
+  },
+  {
+    id: 8,
+    title: "El Viaje de los Residuos",
+    videoId: "2BIcUFD2t8s",
+    thumbnail: "https://img.youtube.com/vi/2BIcUFD2t8s/maxresdefault.jpg",
+    description: "¿Qué pasa con la basura después de tirarla?",
+  },
+];
