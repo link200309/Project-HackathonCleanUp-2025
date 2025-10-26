@@ -20,17 +20,13 @@ const Navbar = () => {
     navigate("/");
   };
 
-  // Función para determinar si un NavLink debe estar activo
   const isNavLinkActive = (path) => {
-    // Para "Jugar" (/game), también activar si estamos en /challenge/:id
     if (path === "/game" && location.pathname.startsWith("/challenge")) {
       return true;
     }
-    // Para "Aprender" (/learn), también activar si estamos en /learn
     if (path === "/learn" && location.pathname.startsWith("/learn")) {
       return true;
     }
-    // Para otras rutas, verificar coincidencia exacta
     return location.pathname === path;
   };
 
@@ -53,7 +49,7 @@ const Navbar = () => {
   const navItems = [
     { name: "Jugar", path: "/game" },
     { name: "Aprender", path: "/learn" },
-    { name: "Recicladores", path: "/recicladores" },
+    { name: "Recolectores", path: "/gatherers" },
     { name: "Ranking", path: "/ranking" },
   ];
 
