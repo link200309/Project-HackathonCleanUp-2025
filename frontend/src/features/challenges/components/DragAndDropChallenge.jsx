@@ -2,10 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { GripVertical } from "lucide-react";
 import TrashBin from "../../../components/TrashBin";
-/**
- * Componente para desafíos de arrastrar y soltar
- * Los items se deben clasificar en categorías con componente TrashBin
- */
+
 const DragAndDropChallenge = ({ challenge, onSubmit }) => {
   const [normalHover, setNormalHover] = useState(null);
   const [draggedItem, setDraggedItem] = useState(null);
@@ -13,7 +10,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState(null);
 
-  // Obtener las categorías únicas de las opciones
   const categories = [...new Set(challenge.options.map((opt) => opt.category))];
 
   const handleDragStart = (item) => {
@@ -35,7 +31,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
     }
   };
 
-  // Función para remover un item de una categoría (doble click o botón)
   const handleRemoveItem = (itemName) => {
     if (!hasSubmitted) {
       const newDroppedItems = { ...droppedItems };
@@ -49,7 +44,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
       !hasSubmitted &&
       Object.keys(droppedItems).length === challenge.options.length
     ) {
-      // Crear string de respuesta con formato "item:categoria,item:categoria"
       const answer = challenge.options
         .map((opt) => `${opt.name}:${droppedItems[opt.name] || "none"}`)
         .join(",");
@@ -69,7 +63,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
     return challenge.options.filter((opt) => !droppedItems[opt.name]);
   };
 
-  // Obtener nombre del color del basurero según categoría
   const getTrashColorName = (category) => {
     const colorNames = {
       organico: "Green", // Verde para orgánico
@@ -83,7 +76,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
     return colorNames[category] || "Grey"; // Default si no coincide
   };
 
-  // Obtener nombre legible de la categoría
   const getCategoryName = (category) => {
     const names = {
       organico: "Orgánico",
@@ -110,7 +102,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
 
   return (
     <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-4xl mx-auto">
-      {/* Pregunta */}
       <div className="mb-8">
         <h2 className="text-3xl font-black text-gray-800 mb-2">
           {challenge.question}
@@ -120,10 +111,8 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
         </p>
       </div>
 
-      {/* Items sin clasificar */}
       <div className="mb-8">
         <h3 className="font-bold text-gray-700 mb-4 text-lg flex items-center gap-2">
-          <span className="text-2xl">🗑️</span>
           Arrastra estos residuos al basurero correcto:
         </h3>
         <div className="flex flex-wrap gap-3 justify-center">
@@ -148,7 +137,7 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
         {getUnplacedItems().length === 0 && !hasSubmitted && (
           <div className="text-center py-4">
             <p className="text-green-600 font-bold text-lg">
-              ¡Todos los residuos clasificados! 🎉
+              ¡Todos los residuos clasificados!
             </p>
             <p className="text-gray-500 text-sm">
               Haz clic en &quot;Verificar&quot; para comprobar tus respuestas
@@ -157,7 +146,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
         )}
       </div>
 
-      {/* Categorías (Zonas de drop con imágenes de basureros) */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
         {categories.map((category) => (
           <div
@@ -189,7 +177,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
             onMouseEnter={() => setNormalHover(category)}
             onMouseLeave={() => setNormalHover(null)}
           >
-            {/* Componente del basurero */}
             <div className="flex flex-col items-center mb-3">
               <div className="flex-shrink-0 h-full flex items-end">
                 <TrashBin
@@ -206,7 +193,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
               </h4>
             </div>
 
-            {/* Items dentro del basurero */}
             <div className="space-y-2 max-h-[120px]">
               {getItemsInCategory(category).map((item, index) => (
                 <div
@@ -235,7 +221,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
               ))}
             </div>
 
-            {/* Indicador de arrastre */}
             {draggedItem && (
               <div className="absolute inset-0 border-4 border-dashed border-green-500 rounded-3xl pointer-events-none animate-pulse"></div>
             )}
@@ -243,7 +228,6 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
         ))}
       </div>
 
-      {/* Botón de enviar */}
       <button
         onClick={handleSubmit}
         disabled={
