@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen overflow-hidden relative">
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32 h-[110dvh]">
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-32 h-[110dvh]">
         <div className="grid lg:grid-cols-2 gap-12 items-center pt-16">
           <div className="space-y-8 animate-fade-in-up">
             <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-green-700 px-4 py-2 rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all">

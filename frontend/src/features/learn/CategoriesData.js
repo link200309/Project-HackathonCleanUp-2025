@@ -4,6 +4,7 @@ export const wasteCategories = [
     name: "Residuos Orgánicos",
     icon: "🍎",
     color: "bg-green-500",
+    trashColorName: "Green",
     description: "Restos de alimentos, poda y material biodegradable",
     examples: [
       "Cáscaras de frutas y verduras",
