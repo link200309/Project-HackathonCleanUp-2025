@@ -7,9 +7,11 @@ import TrashBin from "../../../components/TrashBin";
  * Los items se deben clasificar en categorías con componente TrashBin
  */
 const DragAndDropChallenge = ({ challenge, onSubmit }) => {
+  const [normalHover, setNormalHover] = useState(null);
   const [draggedItem, setDraggedItem] = useState(null);
   const [droppedItems, setDroppedItems] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [hoveredCategory, setHoveredCategory] = useState(null);
 
   // Obtener las categorías únicas de las opciones
   const categories = [...new Set(challenge.options.map((opt) => opt.category))];
@@ -29,6 +31,7 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
         [draggedItem.name]: category,
       });
       setDraggedItem(null);
+      setHoveredCategory(null);
     }
   };
 
@@ -168,6 +171,23 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
                 ? "scale-105 shadow-2xl ring-4 ring-green-400"
                 : "shadow-lg"
             } hover:shadow-xl cursor-pointer`}
+            onDragEnter={() => draggedItem && setHoveredCategory(category)}
+            onDragLeave={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = e.clientX;
+              const y = e.clientY;
+
+              if (
+                x < rect.left ||
+                x >= rect.right ||
+                y < rect.top ||
+                y >= rect.bottom
+              ) {
+                setHoveredCategory(null);
+              }
+            }}
+            onMouseEnter={() => setNormalHover(category)}
+            onMouseLeave={() => setNormalHover(null)}
           >
             {/* Componente del basurero */}
             <div className="flex flex-col items-center mb-3">
@@ -176,6 +196,9 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
                   colorName={getTrashColorName(category)}
                   label={getCategoryName(category)}
                   width="36"
+                  hovered={
+                    hoveredCategory === category || normalHover === category
+                  }
                 />
               </div>
               <h4 className="font-black text-gray-800 text-center text-lg mt-2">
