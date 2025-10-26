@@ -1,17 +1,13 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 
-const TrashBin = ({ colorName = "Green", width = "40" }) => {
-  const [hovered, setHovered] = useState(false);
+const TrashBin = ({ colorName = "Green", width = "40", hovered = false }) => {
   const closedSrc = `/assets/images/bins/Trash${colorName}.webp`;
   const openSrc = `/assets/images/bins/Trash${colorName}Open.webp`;
 
   return (
     <div
       className="relative flex flex-col items-center cursor-pointer select-none z-50"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       <div className={`relative w-${width} h-50`}>
         <AnimatePresence mode="wait">
@@ -36,6 +32,8 @@ const TrashBin = ({ colorName = "Green", width = "40" }) => {
 
 TrashBin.propTypes = {
   colorName: PropTypes.string,
+  hovered: PropTypes.bool,
+  width: PropTypes.string,
 };
 
 export default TrashBin;
