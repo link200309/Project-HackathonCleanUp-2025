@@ -71,7 +71,6 @@ export const JoinForm = ({
       </div>
 
       <div className="space-y-8">
-        {/* Tipo de cuenta */}
         <div>
           <label className="block text-base font-bold text-gray-800 mb-4 flex items-center gap-2">
             <span className="w-1.5 h-6 bg-emerald-500 rounded"></span>
@@ -80,25 +79,25 @@ export const JoinForm = ({
           <div className="grid grid-cols-2 gap-5">
             <button
               onClick={() => setFormData({ ...formData, tipo: "individual" })}
-              className={`p-8 rounded-2xl border-3 transition-all ${
+              className={`p-4 rounded-2xl border-3 transition-all ${
                 formData.tipo === "individual"
                   ? "border-emerald-600 bg-gradient-to-br from-emerald-50 to-teal-50 shadow-xl scale-105"
                   : "border-gray-300 hover:border-emerald-400 hover:shadow-lg bg-white"
               }`}
             >
-              <User className="w-14 h-14 mx-auto mb-4 text-emerald-600" />
+              <User className="w-10 h-10 mx-auto mb-2 text-emerald-600" />
               <div className="font-bold text-xl mb-1">Individual</div>
               <div className="text-sm text-gray-600">Persona física</div>
             </button>
             <button
               onClick={() => setFormData({ ...formData, tipo: "empresa" })}
-              className={`p-8 rounded-2xl border-3 transition-all ${
+              className={`p-4 rounded-2xl border-3 transition-all ${
                 formData.tipo === "empresa"
                   ? "border-yellow-500 bg-gradient-to-br from-yellow-50 to-amber-50 shadow-xl scale-105"
                   : "border-gray-300 hover:border-yellow-400 hover:shadow-lg bg-white"
               }`}
             >
-              <Building2 className="w-14 h-14 mx-auto mb-4 text-yellow-600" />
+              <Building2 className="w-10 h-10 mx-auto mb-2 text-yellow-600" />
               <div className="font-bold text-xl mb-1">Empresa</div>
               <div className="text-sm text-gray-600">Organización</div>
             </button>
