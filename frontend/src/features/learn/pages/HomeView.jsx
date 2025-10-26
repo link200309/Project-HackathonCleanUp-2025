@@ -28,7 +28,7 @@ function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
                   setSelectedCategory(category);
                   setCurrentView("detail");
                 }}
-                className="flex items-end cursor-pointer group"
+                className="flex items-end cursor-pointer group my-12 h-48"
               >
                 <div className="flex-shrink-0 h-full flex items-end">
                   <TrashBin
@@ -36,23 +36,22 @@ function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
                     label={category.name}
                   />
                 </div>
-                <div className="relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all transform group-hover:-translate-y-1 group-hover:scale-[1.02] duration-300 overflow-hidden ml-[-20px] flex-1 z-10">
+                <div className="relative h-44 border bg-black/20 rounded-xl shadow-md hover:shadow-2xl transition-all transform group-hover:-translate-y-1 group-hover:scale-[1.02] duration-300 overflow-hidden ml-[-20px] flex-1 z-10">
                   <div
                     className={`${category.color} p-4 flex items-center justify-between`}
                   >
-                    <span className="text-4xl">{category.icon}</span>
-                    <ChevronRight className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-bold text-lg text-gray-800 mb-2">
+                    <h3 className="font-bold text-lg text-neutral-100">
                       {category.name}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                    <ChevronRight className="w-6 h-6 text-neutral-100" />
+                  </div>
+                  <div className="p-4">
+                    <p className="text-neutral-300 text-sm font-semibold mb-3 line-clamp-2">
                       {category.description}
                     </p>
                     <div className="flex items-center gap-2 text-xs">
-                      <Trash2 className="w-4 h-4 text-gray-500" />
-                      <span className="text-gray-500">
+                      <Trash2 className="w-4 h-4 text-neutral-400" />
+                      <span className="text-neutral-400 font-semibold">
                         Contenedor: {category.binColor}
                       </span>
                     </div>

@@ -3,7 +3,7 @@ export const wasteCategories = [
     id: 1,
     name: "Residuos Orgánicos",
     icon: "🍎",
-    color: "bg-green-500",
+    color: "bg-green-600",
     trashColorName: "Green",
     description: "Restos de alimentos, poda y material biodegradable",
     examples: [
@@ -25,11 +25,12 @@ export const wasteCategories = [
   },
   {
     id: 2,
-    name: "Plásticos (incluye PET)",
+    name: "Plásticos",
     icon: "♻️",
+    trashColorName: "Yellow",
     color: "bg-yellow-500",
     description:
-      "Envases y productos plásticos - PET, PE, PP, PS, PVC (según tipo)",
+      "Envases y productos plásticos - PET, PE, PP, PS",
     examples: [
       "Botellas PET",
       "Envases de shampoo y limpieza",
@@ -37,7 +38,7 @@ export const wasteCategories = [
       "Tapas y envoltorios",
       "Contenedores de comida plásticos",
     ],
-    binColor: "Amarillo (PET: Anaranjado en algunos sistemas)",
+    binColor: "Amarillo",
     decompositionTime: "Decenas a cientos de años (según tipo)",
     tips: [
       "Enjuaga y aplasta botellas para ahorrar espacio",
@@ -50,7 +51,8 @@ export const wasteCategories = [
     id: 3,
     name: "Papel y Cartón",
     icon: "📄",
-    color: "bg-blue-500",
+    trashColorName: "Blue",
+    color: "bg-sky-600",
     description: "Papeles, periódicos, revistas, cajas y cartón limpio",
     examples: [
       "Periódicos y revistas",
@@ -74,9 +76,10 @@ export const wasteCategories = [
     id: 4,
     name: "Vidrio y Metales",
     icon: "🍾",
-    color: "bg-gray-500",
+    trashColorName: "Grey",
+    color: "bg-gray-600",
     description:
-      "Botellas y envases de vidrio y objetos metálicos (latas, envases)",
+      "Botellas y envases de vidrio y objetos metálicos",
     examples: [
       "Botellas de bebidas",
       "Frascos de conservas",
@@ -99,6 +102,7 @@ export const wasteCategories = [
     id: 5,
     name: "Residuos No Aprovechables",
     icon: "🗑️",
+    trashColorName: "Black",
     color: "bg-black",
     description:
       "Residuos destinados a disposición final que no son aprovechables",
@@ -120,8 +124,9 @@ export const wasteCategories = [
   },
   {
     id: 6,
-    name: "Residuos Peligrosos / Especiales",
+    name: "Residuos Peligrosos",
     icon: "⚠️",
+    trashColorName: "Red",
     color: "bg-red-500",
     description:
       "Materiales que requieren manejo y puntos de recolección especiales",
@@ -133,7 +138,7 @@ export const wasteCategories = [
       "Residuos electrónicos (pequeños RAEE)",
     ],
     binColor:
-      "Recolección especial / puntos de entrega (no en contenedores comunes)",
+      "Rojo / especiales",
     decompositionTime:
       "Variable; altamente contaminante si se dispone incorrectamente",
     tips: [

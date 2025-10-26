@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import { Recolector, Nina, Can } from "../components/Animations";
+import { Can } from "../components/Animations";
 
 const AuthLayout = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-green-100 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-green-200 rounded-full opacity-30 blur-2xl"></div>
         <div className="absolute top-40 right-20 w-40 h-40 bg-blue-200 rounded-full opacity-30 blur-2xl"></div>
