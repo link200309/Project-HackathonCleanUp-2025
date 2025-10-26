@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"; // COMENTADO: React no es necesario
-import { Recycle, ChevronRight, LogOut } from "lucide-react"; // COMENTADO: User
+import { useState, useEffect } from "react";
+import { Recycle, ChevronRight, LogOut } from "lucide-react";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../features/auth/context/AuthContext";
 
@@ -20,17 +20,14 @@ const Navbar = () => {
     navigate("/");
   };
 
-  // Función para determinar si un NavLink debe estar activo
   const isNavLinkActive = (path) => {
-    // Para "Jugar" (/game), también activar si estamos en /challenge/:id
     if (path === "/game" && location.pathname.startsWith("/challenge")) {
       return true;
     }
-    // Para "Aprender" (/learn), también activar si estamos en /learn
+
     if (path === "/learn" && location.pathname.startsWith("/learn")) {
       return true;
     }
-    // Para otras rutas, verificar coincidencia exacta
     return location.pathname === path;
   };
 
@@ -72,8 +69,8 @@ const Navbar = () => {
                 <Recycle className="w-7 h-7 text-white" />
               </div>
             </div>
-            <span className="text-2xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-              CleanUp Hero
+            <span className="text-2xl font-black bg-gradient-to-r from-green-400 to-emerald-200 bg-clip-text text-transparent">
+              EcoQuest
             </span>
           </a>
 
@@ -105,7 +102,6 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* Botón de inicio de sesión o cerrar sesión */}
           {!user ? (
             <button
               className="relative group overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-2xl transition-all duration-300 flex items-center gap-2"
