@@ -27,7 +27,7 @@ function ModuleView({ setCurrentView, selectedModule }) {
 
           <div className="mt-8 bg-gradient-to-r from-green-100 to-blue-100 rounded-xl p-6 text-center">
             <p className="text-gray-700 font-semibold">
-              ✅ ¡Has completado este módulo! Sigue aprendiendo para dominar el
+              ¡Has completado este módulo! Sigue aprendiendo para dominar el
               reciclaje.
             </p>
           </div>

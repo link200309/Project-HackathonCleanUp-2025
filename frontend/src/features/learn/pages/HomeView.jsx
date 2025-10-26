@@ -49,7 +49,7 @@ function HomeView({ setCurrentView, setSelectedCategory, setSelectedModule }) {
           </div>
         </div>
         <div className="mt-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl p-6 text-white text-center">
-          <p className="text-lg font-semibold mb-2">🌟 ¡Cada acción cuenta!</p>
+          <p className="text-lg font-semibold mb-2">¡Cada acción cuenta!</p>
           <p className="text-sm opacity-90">
             Al aprender sobre reciclaje, estás ayudando a crear un futuro más
             limpio para Cochabamba y el mundo

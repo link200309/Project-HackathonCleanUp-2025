@@ -60,7 +60,7 @@ function CategoryDetailView({ setCurrentView, selectedCategory }) {
                     className="flex items-start gap-3 text-gray-700"
                   >
                     <span className="text-green-500 font-bold text-lg">✓</span>
-                    <span>{tip}</span>
+                    <span className="text-white">{tip}</span>
                   </li>
                 ))}
               </ul>
