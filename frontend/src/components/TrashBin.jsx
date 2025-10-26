@@ -1,13 +1,18 @@
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 
-const TrashBin = ({ colorName = "Green", hovered = false }) => {
+const TrashBin = ({ colorName = "Green", width = "40", hovered = false }) => {
+  const [hovered, setHovered] = useState(false);
   const closedSrc = `/assets/images/bins/Trash${colorName}.webp`;
   const openSrc = `/assets/images/bins/Trash${colorName}Open.webp`;
 
   return (
-    <div className="relative flex flex-col items-center cursor-pointer select-none z-50">
-      <div className="relative w-40 h-50">
+    <div
+      className="relative flex flex-col items-center cursor-pointer select-none z-50"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className={`relative w-${width} h-50`}>
         <AnimatePresence mode="wait">
           <motion.img
             key={hovered ? "open" : "closed"}
