@@ -1,17 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { GripVertical } from "lucide-react";
-
-// Importar imágenes de basureros
-import TrashYellow from "../../../assets/images/TrashYellow.webp";
-import TrashGreen from "../../../assets/images/TrashGreen.webp";
-import TrashBlue from "../../../assets/images/TrashBlue.webp";
-import TrashGrey from "../../../assets/images/TrashGrey.webp";
-import TrashBlack from "../../../assets/images/TrashBlack.webp";
-
+import TrashBin from "../../../components/TrashBin";
 /**
  * Componente para desafíos de arrastrar y soltar
- * Los items se deben clasificar en categorías con imágenes de basureros
+ * Los items se deben clasificar en categorías con componente TrashBin
  */
 const DragAndDropChallenge = ({ challenge, onSubmit }) => {
   const [draggedItem, setDraggedItem] = useState(null);
@@ -36,6 +29,15 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
         [draggedItem.name]: category,
       });
       setDraggedItem(null);
+    }
+  };
+
+  // Función para remover un item de una categoría (doble click o botón)
+  const handleRemoveItem = (itemName) => {
+    if (!hasSubmitted) {
+      const newDroppedItems = { ...droppedItems };
+      delete newDroppedItems[itemName];
+      setDroppedItems(newDroppedItems);
     }
   };
 
@@ -64,18 +66,18 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
     return challenge.options.filter((opt) => !droppedItems[opt.name]);
   };
 
-  // Obtener imagen del basurero según categoría
-  const getTrashImage = (category) => {
-    const images = {
-      organico: TrashGreen, // Verde para orgánico
-      plastico: TrashYellow, // Amarillo para plástico
-      "papel-carton": TrashBlue, // Azul para papel y cartón
-      vidrio: TrashGreen, // Verde para vidrio
-      metal: TrashYellow, // Amarillo para metal
-      "no-reciclable": TrashBlack, // Negro para no reciclable
+  // Obtener nombre del color del basurero según categoría
+  const getTrashColorName = (category) => {
+    const colorNames = {
+      organico: "Green", // Verde para orgánico
+      plastico: "Yellow", // Amarillo para plástico
+      "papel-carton": "Blue", // Azul para papel y cartón
+      vidrio: "Green", // Verde para vidrio
+      metal: "Yellow", // Amarillo para metal
+      "no-reciclable": "Black", // Negro para no reciclable
     };
 
-    return images[category] || TrashGrey; // Default si no coincide
+    return colorNames[category] || "Grey"; // Default si no coincide
   };
 
   // Obtener nombre legible de la categoría
@@ -167,28 +169,45 @@ const DragAndDropChallenge = ({ challenge, onSubmit }) => {
                 : "shadow-lg"
             } hover:shadow-xl cursor-pointer`}
           >
-            {/* Imagen del basurero */}
+            {/* Componente del basurero */}
             <div className="flex flex-col items-center mb-3">
-              <img
-                src={getTrashImage(category)}
-                alt={`Basurero ${getCategoryName(category)}`}
-                className="w-24 h-24 object-contain mb-2 drop-shadow-lg"
-              />
-              <h4 className="font-black text-gray-800 text-center text-lg">
+              <div className="flex-shrink-0 h-full flex items-end">
+                <TrashBin
+                  colorName={getTrashColorName(category)}
+                  label={getCategoryName(category)}
+                  width="36"
+                />
+              </div>
+              <h4 className="font-black text-gray-800 text-center text-lg mt-2">
                 {getCategoryName(category)}
               </h4>
             </div>
 
             {/* Items dentro del basurero */}
-            <div className="space-y-2 max-h-[120px] overflow-y-auto">
+            <div className="space-y-2 max-h-[120px]">
               {getItemsInCategory(category).map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white/90 backdrop-blur-sm border-2 border-gray-300 px-3 py-2 rounded-xl shadow-sm hover:shadow-md transition-all"
+                  draggable={!hasSubmitted}
+                  onDragStart={() => handleDragStart(item)}
+                  onClick={() => handleRemoveItem(item.name)}
+                  className={`bg-white/90 backdrop-blur-sm border-2 border-gray-300 px-3 py-2 rounded-xl shadow-sm transition-all flex items-center justify-between group ${
+                    !hasSubmitted
+                      ? "cursor-move hover:border-green-400 hover:shadow-md hover:scale-105"
+                      : "cursor-not-allowed opacity-75"
+                  }`}
+                  title={
+                    !hasSubmitted
+                      ? "Arrastra para mover o haz clic para devolver"
+                      : ""
+                  }
                 >
                   <span className="font-medium text-gray-700 text-sm">
                     {item.name}
                   </span>
+                  {!hasSubmitted && (
+                    <GripVertical className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  )}
                 </div>
               ))}
             </div>
