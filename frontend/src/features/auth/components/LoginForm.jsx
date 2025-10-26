@@ -106,7 +106,7 @@ const LoginForm = () => {
       </form>
 
       {/* Divider */}
-      <div className="relative my-6">
+      <div className="relative my-2">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t-2 border-gray-200"></div>
         </div>
