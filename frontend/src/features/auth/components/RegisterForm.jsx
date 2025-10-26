@@ -56,9 +56,7 @@ const RegisterForm = () => {
         </p>
       </div>
 
-      {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        {/* Username */}
         <Input
           label="Nombre de usuario"
           type="text"
@@ -82,7 +80,6 @@ const RegisterForm = () => {
           })}
         />
 
-        {/* Email */}
         <Input
           label="Correo electrónico"
           type="email"
@@ -98,7 +95,6 @@ const RegisterForm = () => {
           })}
         />
 
-        {/* Password */}
         <Input
           label="Contraseña"
           type="password"
@@ -114,7 +110,6 @@ const RegisterForm = () => {
           })}
         />
 
-        {/* Confirm Password */}
         <Input
           label="Confirmar contraseña"
           type="password"
@@ -128,14 +123,12 @@ const RegisterForm = () => {
           })}
         />
 
-        {/* Error Message */}
         {errorMessage && (
           <div className="p-4 bg-red-50 border-2 border-red-200 rounded-xl">
             <p className="text-red-700 text-sm font-medium">{errorMessage}</p>
           </div>
         )}
 
-        {/* Success Message */}
         {successMessage && (
           <div className="p-4 bg-green-50 border-2 border-green-200 rounded-xl">
             <p className="text-green-700 text-sm font-medium flex items-center gap-2">
@@ -144,7 +137,6 @@ const RegisterForm = () => {
           </div>
         )}
 
-        {/* Submit Button */}
         <Button
           type="submit"
           variant="primary"
@@ -157,7 +149,6 @@ const RegisterForm = () => {
         </Button>
       </form>
 
-      {/* Footer */}
       <div className="mt-6 text-center">
         <p className="text-gray-600">
           ¿Ya tienes cuenta?{" "}

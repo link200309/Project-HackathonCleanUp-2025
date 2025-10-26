@@ -61,46 +61,108 @@ const ChallengePage = () => {
     setShowResult(true);
 
     try {
-      const { error: progressError } = await supabase
-        .from("user_progress")
-        .upsert(
-          {
-            user_id: user.id,
-            challenge_id: challenge.id,
-            is_completed: true,
-            is_correct: correct,
-            completed_at: new Date().toISOString(),
-          },
-          {
-            onConflict: "user_id,challenge_id",
-          }
-        );
-
-      if (progressError) {
-        console.error("Error guardando progreso:", progressError);
-      }
-
       if (correct) {
-        const { error: statsError } = await supabase.rpc("increment", {
-          table_name: "user_stats",
-          row_id: user.id,
-          column_name: "total_xp",
-          x: challenge.xp_reward || 10,
-        });
+        const { data: existingProgress } = await supabase
+          .from("user_progress")
+          .select("is_completed")
+          .eq("user_id", user.id)
+          .eq("challenge_id", challenge.id)
+          .single();
 
-        if (statsError) {
-          console.error("Error actualizando XP:", statsError);
+        const isFirstTimeCompleting = !existingProgress?.is_completed;
+
+        const { error: progressError } = await supabase
+          .from("user_progress")
+          .upsert(
+            {
+              user_id: user.id,
+              challenge_id: challenge.id,
+              is_completed: true,
+              is_correct: true,
+              completed_at: new Date().toISOString(),
+            },
+            {
+              onConflict: "user_id,challenge_id",
+            }
+          );
+
+        if (progressError) {
+          console.error("Error guardando progreso:", progressError);
         }
 
-        const { error: countError } = await supabase.rpc("increment", {
-          table_name: "user_stats",
-          row_id: user.id,
-          column_name: "challenges_completed",
-          x: 1,
-        });
+        if (isFirstTimeCompleting) {
+          const { data: currentStats, error: fetchStatsError } = await supabase
+            .from("user_stats")
+            .select("total_xp, challenges_completed")
+            .eq("user_id", user.id)
+            .single();
 
-        if (countError) {
-          console.error("Error actualizando contador:", countError);
+          if (fetchStatsError) {
+            console.error("Error obteniendo stats:", fetchStatsError);
+          } else {
+            const newXP =
+              (currentStats?.total_xp || 0) + (challenge.xp_reward || 10);
+            const newChallengesCompleted =
+              (currentStats?.challenges_completed || 0) + 1;
+
+            const { error: statsError } = await supabase
+              .from("user_stats")
+              .update({
+                total_xp: newXP,
+                challenges_completed: newChallengesCompleted,
+              })
+              .eq("user_id", user.id);
+
+            if (statsError) {
+              console.error("Error actualizando stats:", statsError);
+            } else {
+              console.log(
+                `XP actualizado: +${
+                  challenge.xp_reward || 10
+                } (Total: ${newXP})`
+              );
+            }
+          }
+        } else {
+          console.log(
+            "Challenge ya completado antes. No se otorga XP adicional."
+          );
+        }
+      } else {
+        const { data: existingProgress } = await supabase
+          .from("user_progress")
+          .select("is_completed")
+          .eq("user_id", user.id)
+          .eq("challenge_id", challenge.id)
+          .single();
+
+        
+        if (!existingProgress?.is_completed) {
+          const { error: progressError } = await supabase
+            .from("user_progress")
+            .upsert(
+              {
+                user_id: user.id,
+                challenge_id: challenge.id,
+                is_completed: false,
+                is_correct: false,
+              },
+              {
+                onConflict: "user_id,challenge_id",
+              }
+            );
+
+          if (progressError) {
+            console.error("Error guardando intento fallido:", progressError);
+          } else {
+            console.log(
+              "❌ Intento fallido registrado. El challenge sigue disponible."
+            );
+          }
+        } else {
+          console.log(
+            "🔒 Challenge ya completado antes. No se sobrescribe el progreso al fallar."
+          );
         }
       }
     } catch (err) {
@@ -157,7 +219,6 @@ const ChallengePage = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700 flex items-center justify-center px-4">
         <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md text-center">
-          <div className="text-6xl mb-4">😞</div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">
             Oops! Algo salió mal
           </h2>
@@ -177,7 +238,6 @@ const ChallengePage = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700">
-      {/* Header */}
       <div className="bg-white/10 backdrop-blur-sm border-b-4 border-yellow-400">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -190,7 +250,6 @@ const ChallengePage = () => {
             </button>
 
             <div className="flex items-center gap-4">
-              {/* Categoría */}
               <div
                 className={`bg-gradient-to-r ${getCategoryColor(
                   challenge.category
@@ -201,7 +260,6 @@ const ChallengePage = () => {
                 </span>
               </div>
 
-              {/* Dificultad */}
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
                   <div
@@ -215,7 +273,6 @@ const ChallengePage = () => {
                 ))}
               </div>
 
-              {/* XP Reward */}
               <div className="flex items-center gap-2 bg-yellow-400 px-3 py-2 rounded-full shadow-lg">
                 <Award className="w-4 h-4 text-orange-600" />
                 <span className="font-bold text-green-900">
@@ -227,15 +284,16 @@ const ChallengePage = () => {
         </div>
       </div>
 
-      {/* Challenge Content */}
       <div className="max-w-4xl mx-auto px-4 py-8">
         {challenge.type === "multiple_choice" ? (
           <MultipleChoiceChallenge
+            key={`mc-${userAnswer}`}
             challenge={challenge}
             onSubmit={handleSubmitAnswer}
           />
         ) : challenge.type === "drag_and_drop" ? (
           <DragAndDropChallenge
+            key={`dd-${userAnswer}`}
             challenge={challenge}
             onSubmit={handleSubmitAnswer}
           />
@@ -250,7 +308,6 @@ const ChallengePage = () => {
         <img src={Character3} alt="" />
       </div>
 
-      {/* Result Modal */}
       {showResult && (
         <ResultModal
           isCorrect={isCorrect}

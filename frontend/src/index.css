@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Animaciones para nubes flotantes */
 @keyframes float {
   0%,
   100% {

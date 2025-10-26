@@ -88,7 +88,6 @@ function CategoryDetailView({ setCurrentView, selectedCategory }) {
               </div>
             </div>
 
-            {/* Consejos mejorados */}
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border-2 border-green-200/50">
               <div className="flex items-center gap-3 mb-4">
                 <Lightbulb className="w-6 h-6 text-green-600" />
@@ -109,7 +108,6 @@ function CategoryDetailView({ setCurrentView, selectedCategory }) {
               </ul>
             </div>
 
-            {/* Impacto Ambiental Expandido */}
             {selectedCategory.environmentalImpact && (
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
