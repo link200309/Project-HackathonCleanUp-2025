@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"; // COMENTADO: React no es necesario
 import { Recycle, ChevronRight, LogOut } from "lucide-react"; // COMENTADO: User
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../features/auth/context/AuthContext";
 
 const Navbar = () => {
@@ -8,6 +8,7 @@ const Navbar = () => {
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, signOut } = useAuth();
 
   const goLogin = () => {
@@ -17,6 +18,20 @@ const Navbar = () => {
   const handleLogout = async () => {
     await signOut();
     navigate("/");
+  };
+
+  // Función para determinar si un NavLink debe estar activo
+  const isNavLinkActive = (path) => {
+    // Para "Jugar" (/game), también activar si estamos en /challenge/:id
+    if (path === "/game" && location.pathname.startsWith("/challenge")) {
+      return true;
+    }
+    // Para "Aprender" (/learn), también activar si estamos en /learn
+    if (path === "/learn" && location.pathname.startsWith("/learn")) {
+      return true;
+    }
+    // Para otras rutas, verificar coincidencia exacta
+    return location.pathname === path;
   };
 
   useEffect(() => {
@@ -37,8 +52,8 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Jugar", path: "/game" },
-    { name: "Recicladores", path: "/recicladores" },
     { name: "Aprender", path: "/learn" },
+    { name: "Recicladores", path: "/recicladores" },
     { name: "Ranking", path: "/ranking" },
   ];
 
@@ -63,19 +78,31 @@ const Navbar = () => {
           </a>
 
           <div className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => (
-              <a
-                key={item.path}
-                href={item.path}
-                className="group relative px-10 py-2 rounded-xl transition-all"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-base font-bold text-neutral-100 group-hover:text-yellow-300 transition-colors">
-                    {item.name}
-                  </span>
-                </div>
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = isNavLinkActive(item.path);
+              return (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className="group relative px-10 py-2 rounded-xl transition-all"
+                >
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`text-base font-bold transition-colors ${
+                        isActive
+                          ? "text-yellow-400"
+                          : "text-neutral-100 group-hover:text-yellow-300"
+                      }`}
+                    >
+                      {item.name}
+                    </span>
+                    {isActive && (
+                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-yellow-400 rounded-full"></span>
+                    )}
+                  </div>
+                </NavLink>
+              );
+            })}
           </div>
 
           {/* Botón de inicio de sesión o cerrar sesión */}
