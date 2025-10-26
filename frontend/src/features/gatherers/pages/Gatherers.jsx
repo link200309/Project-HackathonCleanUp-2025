@@ -5,15 +5,14 @@ import {
   Mail,
   Building2,
   User,
-  Filter,
   Star,
   Recycle,
   Package,
   X,
   Check,
 } from "lucide-react";
-import Header from "../../../components/Header";
 import TabsBar from "../components/TabsBar";
+import SearchFilters from "../components/SearchFilters";
 
 const RecyclersMarketplace = () => {
   const [activeTab, setActiveTab] = useState("buscar");
@@ -184,22 +183,6 @@ const RecyclersMarketplace = () => {
 
   return (
     <div className="min-h-screen">
-      <Header
-        title="Red de Recicladores"
-        description="Conecta, recicla y transforma tu comunidad"
-        rightContent={
-          <div className="text-right">
-            <div className="text-2xl font-bold text-white drop-shadow">
-              {recyclers.length}
-            </div>
-            <div className="text-sm text-yellow-100 font-semibold">
-              Recicladores activos
-            </div>
-          </div>
-        }
-        icon="Recycle"
-      />
-
       <TabsBar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -207,64 +190,17 @@ const RecyclersMarketplace = () => {
       />
 
       <div className="max-w-6xl mx-auto p-6">
-        {/* Búsqueda de Recicladores */}
         {activeTab === "buscar" && (
           <div className="space-y-6">
-            {/* Filtros */}
-            <div className="bg-white p-6 rounded-xl shadow-md space-y-4">
-              <div className="flex items-center gap-2 text-emerald-700 font-semibold mb-4">
-                <Filter className="w-5 h-5" />
-                Filtros de búsqueda
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Buscar
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Nombre, zona o material..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Tipo
-                  </label>
-                  <select
-                    value={filterType}
-                    onChange={(e) => setFilterType(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  >
-                    <option value="todos">Todos</option>
-                    <option value="individual">Individuales</option>
-                    <option value="empresa">Empresas</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Material
-                  </label>
-                  <select
-                    value={filterMaterial}
-                    onChange={(e) => setFilterMaterial(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  >
-                    <option value="todos">Todos los materiales</option>
-                    {materialesDisponibles.map((mat) => (
-                      <option key={mat} value={mat}>
-                        {mat}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
+            <SearchFilters
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              filterType={filterType}
+              setFilterType={setFilterType}
+              filterMaterial={filterMaterial}
+              setFilterMaterial={setFilterMaterial}
+              materialesDisponibles={materialesDisponibles}
+            />
 
             {/* Lista de Recicladores */}
             <div className="grid gap-6">
