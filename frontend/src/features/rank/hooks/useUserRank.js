@@ -2,10 +2,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import { useAuth } from "../../auth/context/AuthContext";
 
-/**
- * Hook para obtener el ranking del usuario actual
- * @returns {Object} - { userRank, loading, error }
- */
 export function useUserRank() {
   const { user } = useAuth();
   const [userRank, setUserRank] = useState(null);
@@ -23,7 +19,6 @@ export function useUserRank() {
         setLoading(true);
         setError(null);
 
-        // Obtener datos del usuario
         const { data: userData, error: userError } = await supabase
           .from("users")
           .select(
@@ -35,7 +30,6 @@ export function useUserRank() {
             user_stats (
               total_xp,
               current_level,
-              challenges_completed,
               current_streak,
               longest_streak
             )
@@ -46,7 +40,16 @@ export function useUserRank() {
 
         if (userError) throw userError;
 
-        // Calcular ranking global (contar usuarios con más XP)
+        const { count: completedCount, error: progressError } = await supabase
+          .from("user_progress")
+          .select("*", { count: "exact", head: true })
+          .eq("user_id", user.id)
+          .eq("is_completed", true);
+
+        if (progressError) {
+          console.error("Error fetching progress count:", progressError);
+        }
+
         const { count, error: countError } = await supabase
           .from("user_stats")
           .select("*", { count: "exact", head: true })
@@ -64,7 +67,7 @@ export function useUserRank() {
           city: userData.city || "Sin ciudad",
           total_xp: userData.user_stats.total_xp,
           current_level: userData.user_stats.current_level,
-          challenges_completed: userData.user_stats.challenges_completed,
+          challenges_completed: completedCount || 0, // Conteo real desde user_progress
           current_streak: userData.user_stats.current_streak,
           longest_streak: userData.user_stats.longest_streak,
         });

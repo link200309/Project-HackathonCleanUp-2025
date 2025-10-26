@@ -1,11 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 
-/**
- * Hook para obtener el ranking global de usuarios
- * @param {number} limit - Número máximo de usuarios a obtener (default: 100)
- * @returns {Object} - { rankings, loading, error, refreshRanking }
- */
+
 export function useRanking(limit = 100) {
   const [rankings, setRankings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +12,6 @@ export function useRanking(limit = 100) {
       setLoading(true);
       setError(null);
 
-      // Query optimizada según SUPABASE-SETUP.md
       const { data, error: fetchError } = await supabase
         .from("users")
         .select(
@@ -28,7 +23,6 @@ export function useRanking(limit = 100) {
           user_stats!inner (
             total_xp,
             current_level,
-            challenges_completed,
             current_streak
           )
         `
@@ -38,7 +32,25 @@ export function useRanking(limit = 100) {
 
       if (fetchError) throw fetchError;
 
-      // Agregar ranking number y formatear datos
+      const userIds = data.map((user) => user.id);
+      const { data: progressData, error: progressError } = await supabase
+        .from("user_progress")
+        .select("user_id, is_completed")
+        .in("user_id", userIds)
+        .eq("is_completed", true);
+
+      if (progressError) {
+        console.error("Error fetching progress:", progressError);
+      }
+
+      const completedCounts = {};
+      if (progressData) {
+        progressData.forEach((progress) => {
+          completedCounts[progress.user_id] =
+            (completedCounts[progress.user_id] || 0) + 1;
+        });
+      }
+
       const formattedData = data.map((user, index) => ({
         rank: index + 1,
         id: user.id,
@@ -47,7 +59,7 @@ export function useRanking(limit = 100) {
         city: user.city || "Sin ciudad",
         total_xp: user.user_stats.total_xp,
         current_level: user.user_stats.current_level,
-        challenges_completed: user.user_stats.challenges_completed,
+        challenges_completed: completedCounts[user.id] || 0, // Conteo real desde user_progress
         current_streak: user.user_stats.current_streak,
       }));
 
@@ -63,7 +75,6 @@ export function useRanking(limit = 100) {
   useEffect(() => {
     fetchRanking();
 
-    // Suscripción a cambios en tiempo real
     const subscription = supabase
       .channel("user_stats_changes")
       .on(

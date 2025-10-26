@@ -10,7 +10,6 @@ const RankingPage = () => {
   const [filterLevel, setFilterLevel] = useState("all");
   const { rankings, error, refreshRanking } = useRanking(limit);
 
-  // Filtrar por nivel si está activo
   const filteredRankings = rankings.filter((rank) => {
     if (filterLevel === "all") return true;
     return rank.current_level === filterLevel;
@@ -37,7 +36,6 @@ const RankingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-700 via-green-600 to-teal-700 pb-16">
-      {/* Header */}
       <div className="sticky top-0 z-10 bg-gradient-to-r from-emerald-800 to-green-700 border-b-4 border-yellow-400 shadow-xl mb-8">
         <div className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
@@ -58,7 +56,6 @@ const RankingPage = () => {
       </div>
 
       <div className="relative max-w-6xl mx-auto px-4">
-        {/* Filtros */}
         <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-4 mb-6">
           <div className="flex items-center gap-4 flex-wrap">
             <div className="flex items-center gap-2">
@@ -93,7 +90,6 @@ const RankingPage = () => {
           </div>
         </div>
 
-        {/* Lista de ranking */}
         <div className="space-y-4">
           {filteredRankings.length === 0 ? (
             <div className="bg-white rounded-3xl shadow-xl p-12 text-center">
@@ -116,7 +112,6 @@ const RankingPage = () => {
           )}
         </div>
 
-        {/* Botón cargar más */}
         {!filterLevel && rankings.length >= limit && (
           <div className="mt-8 text-center">
             <button
@@ -128,7 +123,6 @@ const RankingPage = () => {
           </div>
         )}
 
-        {/* Mensaje motivacional */}
         <div className="mt-12 bg-white/95 backdrop-blur-sm rounded-3xl border-b-8 border-yellow-400 px-8 py-6 shadow-2xl text-center">
           <h3 className="text-2xl font-black text-green-900 mb-2">
             ¡Sigue reciclando!

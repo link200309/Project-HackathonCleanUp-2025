@@ -69,7 +69,6 @@ function ModuleView({ setCurrentView, selectedModule }) {
             </div>
           </div>
 
-          {/* Contenido mejorado */}
           <div className="p-6 md:p-10 space-y-6">
             {sections.map((section, idx) => (
               <div key={idx}>
