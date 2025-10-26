@@ -109,7 +109,7 @@ const ChallengePage = () => {
 
   const handleCloseResult = () => {
     setShowResult(false);
-    navigate("/learn");
+    navigate(-1);
   };
 
   const handleTryAgain = () => {
@@ -164,7 +164,7 @@ const ChallengePage = () => {
             {error || "Desafío no encontrado"}
           </p>
           <button
-            onClick={() => navigate("/learn")}
+            onClick={() => navigate(-1)}
             className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-xl transition-all"
           >
             Volver a Aprender
@@ -181,7 +181,7 @@ const ChallengePage = () => {
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <button
-              onClick={() => navigate("/learn")}
+              onClick={() => navigate(-1)}
               className="flex items-center gap-2 text-white font-bold hover:text-yellow-300 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
