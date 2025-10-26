@@ -24,7 +24,6 @@ const Navbar = () => {
     if (path === "/game" && location.pathname.startsWith("/challenge")) {
       return true;
     }
-
     if (path === "/learn" && location.pathname.startsWith("/learn")) {
       return true;
     }
@@ -50,7 +49,7 @@ const Navbar = () => {
   const navItems = [
     { name: "Jugar", path: "/game" },
     { name: "Aprender", path: "/learn" },
-    { name: "Recicladores", path: "/recicladores" },
+    { name: "Recolectores", path: "/gatherers" },
     { name: "Ranking", path: "/ranking" },
   ];
 

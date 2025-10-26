@@ -18,6 +18,7 @@ import ProfileCheckRoute from "./shared/routes/ProfileCheckRoute";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Learn from "./features/learn/pages/Learn";
+import Gatherers from "./features/gatherers/pages/Gatherers";
 
 function App() {
   return (
@@ -72,6 +73,14 @@ function App() {
               element={
                 <ProfileCheckRoute>
                   <Learn />
+                </ProfileCheckRoute>
+              }
+            />
+            <Route
+              path="/gatherers"
+              element={
+                <ProfileCheckRoute>
+                  <Gatherers />
                 </ProfileCheckRoute>
               }
             />

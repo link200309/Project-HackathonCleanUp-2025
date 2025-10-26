@@ -11,7 +11,7 @@ const WasteCategoriesGrid = ({
   const [hoveredId, setHoveredId] = useState(null);
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-white mb-12 text-center">
           Categorías de Residuos
