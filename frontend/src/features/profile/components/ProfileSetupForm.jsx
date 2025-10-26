@@ -7,7 +7,6 @@ import Button from "../../../shared/components/Button";
 import Input from "../../../shared/components/Input";
 import Card from "../../../shared/components/Card";
 
-// Opciones de avatares con emojis de naturaleza
 const AVATAR_OPTIONS = [
   { emoji: "🌱", label: "Brote" },
   { emoji: "🌿", label: "Hoja" },
@@ -23,10 +22,7 @@ const AVATAR_OPTIONS = [
   { emoji: "🌼", label: "Margarita" },
 ];
 
-/**
- * Componente de configuración inicial de perfil
- * Se muestra después del registro para completar ciudad y avatar
- */
+
 export default function ProfileSetupForm({ onSkip }) {
   const navigate = useNavigate();
   const { updateProfile, loading, error } = useProfileSetup();
@@ -49,7 +45,7 @@ export default function ProfileSetupForm({ onSkip }) {
     });
 
     if (result.success) {
-      navigate("/learn");
+      navigate("/game");
     }
   };
 
@@ -57,7 +53,7 @@ export default function ProfileSetupForm({ onSkip }) {
     if (onSkip) {
       onSkip();
     } else {
-      navigate("/learn");
+      navigate("/game");
     }
   };
 
@@ -105,7 +101,6 @@ export default function ProfileSetupForm({ onSkip }) {
           </p>
         </div>
 
-        {/* Campo de Ciudad (opcional) */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             ¿De dónde eres? (opcional)
@@ -125,14 +120,12 @@ export default function ProfileSetupForm({ onSkip }) {
           </p>
         </div>
 
-        {/* Mensaje de error */}
         {error && (
           <div className="p-3 bg-red-50 border border-red-200 rounded-xl">
             <p className="text-sm text-red-600 text-center">{error}</p>
           </div>
         )}
 
-        {/* Botones */}
         <div className="space-y-3">
           <Button type="submit" variant="primary" fullWidth loading={loading}>
             Continuar
@@ -150,7 +143,6 @@ export default function ProfileSetupForm({ onSkip }) {
         </div>
       </form>
 
-      {/* Información adicional */}
       <div className="mt-6 text-center">
         <p className="text-xs text-gray-500">
           Puedes cambiar tu avatar y ciudad en cualquier momento desde tu perfil

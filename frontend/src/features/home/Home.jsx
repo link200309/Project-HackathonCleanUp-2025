@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Recycle,
   Users,
@@ -10,10 +10,12 @@ import {
   Play,
 } from "lucide-react";
 import recycle from "../../assets/images/Recycle.webp";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const [setScrollY] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -31,6 +33,10 @@ const Home = () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
+
+  const goLogin = () => {
+    navigate("/login");
+  };
 
   return (
     <div className="min-h-screen overflow-hidden relative">
@@ -56,13 +62,12 @@ const Home = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group bg-white/90 text-green-700 px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1">
+              <button
+                className="group bg-white/90 text-green-700 px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1"
+                onClick={goLogin}
+              >
                 <Play className="w-6 h-6 group-hover:scale-110 transition-transform" />
                 Empezar ahora
-              </button>
-              <button className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-bold text-lg border-2 border-white/50 hover:bg-white/30 hover:border-white hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1">
-                <BookOpen className="w-6 h-6" />
-                Ver demo
               </button>
             </div>
           </div>
@@ -205,7 +210,7 @@ const Home = () => {
             Miles de usuarios ya están aprendiendo y haciendo la diferencia. ¿Te
             unes?
           </p>
-          <button className="bg-white text-green-600 px-10 py-5 rounded-2xl font-bold text-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 inline-flex items-center gap-3 transform hover:-translate-y-1">
+          <button className="bg-white text-green-600 px-10 py-5 rounded-2xl font-bold text-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 inline-flex items-center gap-3 transform hover:-translate-y-1" onClick={goLogin}>
             Comenzar gratis ahora
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -219,10 +224,10 @@ const Home = () => {
               <div className="bg-gradient-to-br from-green-400 to-emerald-600 p-2 rounded-2xl">
                 <Recycle className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-bold">CleanUp Hero</span>
+              <span className="text-xl font-bold">EcoQuest</span>
             </div>
             <div className="text-gray-400 text-sm">
-              © 2025 CleanUp Hero - Hackathon CleanUp Hack 2025
+              © 2025 EcoQuest - Hackathon CleanUp Hack 2025
             </div>
           </div>
         </div>

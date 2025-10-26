@@ -2,9 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { CheckCircle2 } from "lucide-react";
 
-/**
- * Componente para desafíos de opción múltiple
- */
+
 const MultipleChoiceChallenge = ({ challenge, onSubmit }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -18,7 +16,6 @@ const MultipleChoiceChallenge = ({ challenge, onSubmit }) => {
 
   return (
     <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-2xl mx-auto">
-      {/* Imagen del desafío (si existe) */}
       {challenge.image_url && (
         <div className="mb-6 rounded-2xl overflow-hidden">
           <img
@@ -29,7 +26,6 @@ const MultipleChoiceChallenge = ({ challenge, onSubmit }) => {
         </div>
       )}
 
-      {/* Pregunta */}
       <div className="mb-8">
         <h2 className="text-3xl font-black text-gray-800 mb-2">
           {challenge.question}
@@ -39,7 +35,6 @@ const MultipleChoiceChallenge = ({ challenge, onSubmit }) => {
         </p>
       </div>
 
-      {/* Opciones */}
       <div className="space-y-3 mb-8">
         {challenge.options.map((option, index) => {
           const isSelected = selectedOption === option;
@@ -82,7 +77,6 @@ const MultipleChoiceChallenge = ({ challenge, onSubmit }) => {
         })}
       </div>
 
-      {/* Botón de enviar */}
       <button
         onClick={handleSubmit}
         disabled={selectedOption === null || hasSubmitted}
